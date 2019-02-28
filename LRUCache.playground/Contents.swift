@@ -3,7 +3,7 @@ import UIKit
 var str = "Hello, playground"
 
 class LinkedNode {
-    var v:Int?
+    var v:Int = 0
     var next:LinkedNode?
     var previous:LinkedNode?
     
@@ -44,18 +44,27 @@ class LRUCache {
             tempHead?.previous = LN
         }
         
+        else {
+            tail = LN
+        }
+        
         head = LN
         size += 1
         
         hashT[value] = LN
         
+        
+        
         if size > limit {
-            tempTail = tail?.previous
-            tempTail?.next = nil
-            //borrar tail
-            //remover tail de hashT
-            tail = tempTail
-            size -= 1
+            if tail != nil {
+                tempTail = tail?.previous
+                tempTail?.next = nil
+                //borrar tail
+                //remover tail de hashT
+                
+                
+                tail = tempTail
+                size -= 1            }
         }
         
     }
@@ -71,5 +80,8 @@ l.put(3)
 print(l.hashT)
 l.put(4)
 print(l.hashT)
-l.put(5)
-print(l.hashT)
+//l.put(5)
+//print(l.hashT)
+print(l.head?.v)
+print(l.head?.next?.v)
+print(l.head?.next?.next?.v)
