@@ -30,18 +30,33 @@ class LRUCache {
     var p:LinkedNode?
     var s:LinkedNode?
     
-    
-    
+    func get (_ value:Int) -> Int?{
+        var result:Int? = 0
+        
+        
+        
+        s = hashT[value]
+        p = s?.previous
+        n = s?.next
+        
+        p?.next = n
+        n?.previous = p
+        result = s?.v
+        
+        //borrar s de hashT
+        return result
+    }
     
     func put (_ value:Int) -> Void{
         var LN:LinkedNode = LinkedNode(value)
         
-        if size != 0 {
+        if hashT.count > 0 {
             tempHead = head
             LN.next = tempHead
             LN.previous = nil
             
             tempHead?.previous = LN
+            
         }
         
         else {
@@ -49,28 +64,30 @@ class LRUCache {
         }
         
         head = LN
-        size += 1
         
         hashT[value] = LN
         
         
         
         if size > limit {
-            if tail != nil {
-                tempTail = tail?.previous
-                tempTail?.next = nil
-                //borrar tail
-                //remover tail de hashT
-                
-                
-                tail = tempTail
-                size -= 1            }
+            tempTail = tail?.previous
+            tempTail?.next = nil
+            //borrar tail
+            //remover tail de hashT
+            
+            
+            tail = tempTail
+            size -= 1
+            
         }
         
     }
     
     
 }
+
+//------------------------ Extension --------------------------
+
 
 var l = LRUCache()
 
@@ -85,3 +102,9 @@ print(l.hashT)
 print(l.head?.v)
 print(l.head?.next?.v)
 print(l.head?.next?.next?.v)
+print(l.tail?.v)
+
+print("///////////////")
+print(l.get(3))
+print(l.head?.v)
+print(l.head?.next?.v)
