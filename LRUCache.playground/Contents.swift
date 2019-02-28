@@ -59,7 +59,7 @@ class LRUCache {
             
         }
         
-        else {
+        if tail == nil {
             tail = LN
         }
         
@@ -69,12 +69,14 @@ class LRUCache {
         
         
         
-        if size > limit {
+        if hashT.count > limit {
+            
+            
             tempTail = tail?.previous
             tempTail?.next = nil
             //borrar tail
             //remover tail de hashT
-            
+            //hashT[tail?.v] = nil
             
             tail = tempTail
             size -= 1
@@ -97,23 +99,26 @@ extension LRUCache {
 
 var l = LRUCache()
 
-l.put(2)
+//l.put(2)
 print(l.hashT)
+print(l.tail?.v)
 l.put(3)
 print(l.hashT)
+print(l.tail?.v)
 l.put(4)
 print(l.hashT)
+print(l.tail?.v)
 //l.put(5)
 //print(l.hashT)
-print(l.head?.v)
-print(l.head?.next?.v)
-print(l.head?.next?.next?.v)
-print(l.tail?.v)
+//print(l.head?.v)
+//print(l.head?.next?.v)
+//print(l.head?.next?.next?.v)
+//print(l.tail?.v)
 
 print("///////////////")
-print(l.get(3))
-print(l.head?.v)
-print(l.head?.next?.v)
+//print(l.get(3))
+//print(l.head?.v)
+//print(l.head?.next?.v)
 
 //-------------- implementacion de extension -------------------
 l.hashSize
