@@ -87,6 +87,12 @@ class LRUCache {
 }
 
 //------------------------ Extension --------------------------
+extension LRUCache {
+    var hashSize:Int {
+        return self.hashT.count
+    }
+}
+
 
 
 var l = LRUCache()
@@ -108,3 +114,6 @@ print("///////////////")
 print(l.get(3))
 print(l.head?.v)
 print(l.head?.next?.v)
+
+//-------------- implementacion de extension -------------------
+l.hashSize
