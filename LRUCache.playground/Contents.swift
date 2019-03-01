@@ -64,23 +64,17 @@ class LRUCache {
         if tail == nil { tail = LN }
         
         head = LN
-        
         hashT[value] = LN
         
         if hashT.count > limit {
-            
             tempTail = tail?.previous
             tempTail?.next = nil
-            //borrar tail
             //remover tail de hashT
-            
             if let x = tail { hashT[tail!.v] = nil }
             
             tail = tempTail
         }
-        
     }
-    
 }
 
 //------------------------ Extension --------------------------
@@ -91,47 +85,36 @@ extension LRUCache {
 }
 
 
-
+//------------------------ Demostrasion --------------------------
 var l = LRUCache()
 
 l.put(2)
 print(l.hashT)
-print(l.tail?.v)
 l.put(3)
 print(l.hashT)
-print(l.tail?.v)
 l.put(4)
 print(l.hashT)
-print(l.tail?.v)
 
 print("---- Normal -----")
 print("la cabeza es \(l.head?.v)")
 print(l.head?.next?.v)
-print(l.head?.next?.next?.v)
-
-
 print("la cola es \(l.tail?.v)")
 
-
 print("----- agregar un cuarto elemento -------")
-
 l.put(5)
 print(l.hashT)
 print("la cabeza es \(l.head?.v)")
 print(l.head?.next?.v)
-//print(l.head?.next?.next?.v)
 print("la cola es \(l.tail?.v)")
-//print(l.tail?.v)
-print("///////////////")
+
+print("----- usar GET -------")
 print("se obtendra \(l.get(3))")
 print("la cabeza es \(l.head?.v)")
 print(l.head?.next?.v)
 print(l.hashT)
 
-
 print("se obtendra \(l.get(5))")
-
-print("tamano de hashTable \(l.hashSize)")
 print("la cabeza es \(l.head?.v)")
-print(l.hashT)//-------------- implementacion de extension -------------------
-l.hashSize
+print(l.hashT)
+//-------------- implementacion de extension -------------------
+print("tamano de hashTable \(l.hashSize)")
