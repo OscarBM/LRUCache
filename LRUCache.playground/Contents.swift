@@ -1,6 +1,6 @@
-import UIKit
+//: Playground - noun: a place where people can play
 
-var str = "Hello, playground"
+import UIKit
 
 class LinkedNode {
     var v:Int = 0
@@ -76,10 +76,17 @@ class LRUCache {
             tempTail?.next = nil
             //borrar tail
             //remover tail de hashT
-            //hashT[tail?.v] = nil
+            
+            if let x = tail {
+                hashT[tail!.v] = nil
+            } else {
+                
+            }
+            
+            
             
             tail = tempTail
-            size -= 1
+            //size -= 1
             
         }
         
@@ -99,7 +106,7 @@ extension LRUCache {
 
 var l = LRUCache()
 
-//l.put(2)
+l.put(2)
 print(l.hashT)
 print(l.tail?.v)
 l.put(3)
@@ -108,17 +115,28 @@ print(l.tail?.v)
 l.put(4)
 print(l.hashT)
 print(l.tail?.v)
-//l.put(5)
-//print(l.hashT)
-//print(l.head?.v)
-//print(l.head?.next?.v)
-//print(l.head?.next?.next?.v)
-//print(l.tail?.v)
 
+print("---- Normal -----")
+print("la cabeza es \(l.head?.v)")
+print(l.head?.next?.v)
+print(l.head?.next?.next?.v)
+
+
+print("la cola es \(l.tail?.v)")
+
+
+print("----- agregar un cuarto elemento -------")
+
+l.put(5)
+print(l.hashT)
+print("la cabeza es \(l.head?.v)")
+print(l.head?.next?.v)
+//print(l.head?.next?.next?.v)
+print("la cola es \(l.tail?.v)")
+//print(l.tail?.v)
 print("///////////////")
 //print(l.get(3))
 //print(l.head?.v)
 //print(l.head?.next?.v)
-
 //-------------- implementacion de extension -------------------
 l.hashSize
