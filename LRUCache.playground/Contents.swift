@@ -8,12 +8,7 @@ class LinkedNode {
     var previous:LinkedNode?
     
     //init(_ v1:Int, _ next1:LinkedNode?,_ previous1:LinkedNode?) {
-    init(_ v1:Int) {
-        self.v = v1
-        //self.next = next1
-        //self.previous = previous1
-    }
-    
+    init(_ v1:Int) { self.v = v1 }
 }
 
 class LRUCache {
@@ -32,18 +27,26 @@ class LRUCache {
     
     func get (_ value:Int) -> Int?{
         var result:Int? = 0
-        
-        
-        
+        //obtener referencias
         s = hashT[value]
         p = s?.previous
         n = s?.next
         
+        //reasignacion de valores. sacar a s de la lista
         p?.next = n
         n?.previous = p
+        if s?.previous == nil {
+            head = s?.next
+        } else if s?.next == nil {
+            tail = s?.previous
+        }
         result = s?.v
         
         //borrar s de hashT
+        if let x = s {
+            print("borraremos \(s!.v)")
+            hashT[s!.v] = nil
+        }
         return result
     }
     
@@ -56,42 +59,27 @@ class LRUCache {
             LN.previous = nil
             
             tempHead?.previous = LN
-            
         }
         
-        if tail == nil {
-            tail = LN
-        }
+        if tail == nil { tail = LN }
         
         head = LN
         
         hashT[value] = LN
         
-        
-        
         if hashT.count > limit {
-            
             
             tempTail = tail?.previous
             tempTail?.next = nil
             //borrar tail
             //remover tail de hashT
             
-            if let x = tail {
-                hashT[tail!.v] = nil
-            } else {
-                
-            }
-            
-            
+            if let x = tail { hashT[tail!.v] = nil }
             
             tail = tempTail
-            //size -= 1
-            
         }
         
     }
-    
     
 }
 
@@ -135,8 +123,15 @@ print(l.head?.next?.v)
 print("la cola es \(l.tail?.v)")
 //print(l.tail?.v)
 print("///////////////")
-//print(l.get(3))
-//print(l.head?.v)
-//print(l.head?.next?.v)
-//-------------- implementacion de extension -------------------
+print("se obtendra \(l.get(3))")
+print("la cabeza es \(l.head?.v)")
+print(l.head?.next?.v)
+print(l.hashT)
+
+
+print("se obtendra \(l.get(5))")
+
+print("tamano de hashTable \(l.hashSize)")
+print("la cabeza es \(l.head?.v)")
+print(l.hashT)//-------------- implementacion de extension -------------------
 l.hashSize
